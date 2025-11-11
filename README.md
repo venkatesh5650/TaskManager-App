@@ -106,15 +106,16 @@ Access the app at http://localhost:5174
  ### 📸 Screenshots
 
 ```
-
+```
 ![Login Page](screenshots/login.png)
 ![Signup Page](screenshots/signup.png)
 ![Dashboard Page](screenshots/dashboard.png)
-
+```
 ---
+```
+### 📚 References
 
-📚 References
-
+```
 React.js Documentation
 
 Node.js & Express Documentation
