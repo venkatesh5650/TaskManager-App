@@ -107,9 +107,9 @@ Access the app at http://localhost:5174
 
 ```
 ```
-![Login Page](screenshots/login.png)
-![Signup Page](screenshots/signup.png)
-![Dashboard Page](screenshots/dashboard.png)
+![Login Page](UserManagement-Frontend/screenshots/login.png)
+![Signup Page](UserManagement-Frontend/screenshots/signup.png)
+![Dashboard Page](UserManagement-Frontend/screenshots/dashboard.png)
 ```
 ---
 ```
