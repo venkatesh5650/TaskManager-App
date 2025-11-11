@@ -84,6 +84,8 @@ npm start
 
 Access the app at http://localhost:5174
 
+---
+
 ## 🔗 API Endpoints (Sample Overview)
 
  # 🧑‍💼 Authentication APIs
