@@ -101,14 +101,17 @@ Access the app at http://localhost:5174
 | **GET**  | `/api/auth/profile` | Get logged-in user profile  | ✅ Yes (JWT)   |
 
 ```
+---
+```
+ ### 📸 Screenshots
 
-📸 Screenshots
+```
 
 ![Login Page](screenshots/login.png)
 ![Signup Page](screenshots/signup.png)
 ![Dashboard Page](screenshots/dashboard.png)
 
-
+---
 
 📚 References
 
