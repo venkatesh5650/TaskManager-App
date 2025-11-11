@@ -5,8 +5,8 @@
 A **Scalable Web App** built with **React.js (frontend)** and **Node.js/Express (backend)**.  
 Features **user authentication, profile management, and task dashboard** with full CRUD operations.
 
-**Live Demo:** _(if deployed, add link here)_  
-**GitHub Repository:** [https://github.com/yourusername/project-name](https://github.com/yourusername/project-name)
+**Live Demo:** https://user-management-frontend-a7l6.vercel.app
+
 
 ---
 
@@ -84,27 +84,19 @@ npm start
 
 Access the app at http://localhost:5174
 
-🔗 API Endpoints (Sample)
+## 🔗 API Endpoints (Sample Overview)
 
-Auth
+ # 🧑‍💼 Authentication APIs
 
-POST /api/auth/signup – Signup new user
+```
 
-POST /api/auth/login – Login user & get JWT
+| Method   | Endpoint            | Description                 | Auth Required |
+| -------- | ------------------- | --------------------------- | ------------- |
+| **POST** | `/api/auth/signup`  | Register a new user         | ❌ No          |
+| **POST** | `/api/auth/login`   | Login and receive JWT token | ❌ No          |
+| **GET**  | `/api/auth/profile` | Get logged-in user profile  | ✅ Yes (JWT)   |
 
-GET /api/auth/profile – Fetch profile (protected)
-
-Tasks
-
-GET /api/tasks – Get all tasks (search/filter)
-
-POST /api/tasks – Create a task
-
-PUT /api/tasks/:id – Update a task
-
-DELETE /api/tasks/:id – Delete a task
-
-(Full API documented in backend/docs Postman collection)
+```
 
 📸 Screenshots
 
