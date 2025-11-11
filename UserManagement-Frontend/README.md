@@ -1,4 +1,4 @@
-# Primetrade.ai Frontend & Backend Assignment
+# TaskMangement Full Stack Application
 
 ## 🚀 Project Overview
 
@@ -63,7 +63,7 @@ JWT_SECRET=your_secret_key
 
 Run backend server:
 
-npm start
+node app.js
 
 Frontend
 
@@ -112,17 +112,7 @@ DELETE /api/tasks/:id – Delete a task
 ![Signup Page](screenshots/signup.png)
 ![Dashboard Page](screenshots/dashboard.png)
 
-(Add 2–3 screenshots of login, dashboard, and task CRUD features here)
 
-✅ Author
-
-Name: Karthan Venkatesh
-
-Role: Frontend Developer Intern
-
-Email: karthanvenkateshvenkatesh@gmail.com
-
-GitHub: https://github.com/venkatesh5650/
 
 📚 References
 
