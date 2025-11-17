@@ -13,6 +13,8 @@ import "./index.css";
 
 export default function Dashboard() {
   const navigate = useNavigate();
+
+  // State management
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -20,41 +22,50 @@ export default function Dashboard() {
   const [statusFilter, setStatusFilter] = useState("");
   const [user, setUser] = useState({});
 
+  // Fetch filtered tasks from API
   const fetchTasks = async () => {
     const res = await getTasks(search, statusFilter);
     setTasks(res.data);
   };
 
+  // Fetch logged-in user's profile
   const fetchProfile = async () => {
     const res = await getProfile();
     setUser(res.data);
   };
 
+  // Re-fetch tasks whenever search or filter changes
   useEffect(() => {
     fetchTasks();
     fetchProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search, statusFilter]);
 
+  // Create a new task
   const handleCreate = async (e) => {
     e.preventDefault();
-    if (!title) return;
+    if (!title) return; // Require title
+
     await createTask({ title, description: desc });
-    setTitle("");
+
+    setTitle(""); // Reset form
     setDesc("");
-    fetchTasks();
+    fetchTasks(); // Refresh list
   };
 
+  // Delete task
   const handleDelete = async (id) => {
     await deleteTask(id);
     fetchTasks();
   };
 
+  // Update task status
   const handleUpdateStatus = async (id, status) => {
     await updateTask(id, { status });
     fetchTasks();
   };
 
+  // Logout: remove token and redirect
   const logout = () => {
     localStorage.removeItem("token");
     navigate("/login");
@@ -62,7 +73,7 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      {/* Header */}
+      {/* Header Section */}
       <div className="d-flex justify-content-between align-items-center mb-4 header">
         <div className="user-info">
           <h2>
@@ -91,6 +102,7 @@ export default function Dashboard() {
               required
             />
           </div>
+
           <div className="col-md-5">
             <input
               type="text"
@@ -100,6 +112,7 @@ export default function Dashboard() {
               className="form-control"
             />
           </div>
+
           <div className="col-md-2 d-grid">
             <button type="submit" className="btn btn-primary">
               Add
@@ -108,7 +121,7 @@ export default function Dashboard() {
         </div>
       </form>
 
-      {/* Search & Filter */}
+      {/* Search + Status Filter */}
       <div className="search-filter row g-2 mb-4">
         <div className="col-md-8">
           <input
@@ -119,6 +132,7 @@ export default function Dashboard() {
             className="form-control"
           />
         </div>
+
         <div className="col-md-4">
           <select
             value={statusFilter}
@@ -143,10 +157,13 @@ export default function Dashboard() {
             <div>
               <p className="task-title mb-1">{t.title}</p>
               <p className="task-desc mb-1">{t.description}</p>
+
+              {/* Task status with color badge */}
               <p className={`task-status mb-0 status-${t.status}`}>
                 {t.status}
               </p>
-              {/* Status Update */}
+
+              {/* Status Update Buttons */}
               <div className="mt-2 d-flex gap-2">
                 <button
                   onClick={() => handleUpdateStatus(t.id, "todo")}
@@ -154,12 +171,14 @@ export default function Dashboard() {
                 >
                   Todo
                 </button>
+
                 <button
                   onClick={() => handleUpdateStatus(t.id, "inprogress")}
                   className="btn btn-sm btn-outline-warning"
                 >
                   In Progress
                 </button>
+
                 <button
                   onClick={() => handleUpdateStatus(t.id, "done")}
                   className="btn btn-sm btn-outline-success"
@@ -168,6 +187,8 @@ export default function Dashboard() {
                 </button>
               </div>
             </div>
+
+            {/* Delete Button */}
             <button
               onClick={() => handleDelete(t.id)}
               className="btn btn-sm btn-danger"

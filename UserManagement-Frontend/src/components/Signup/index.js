@@ -7,19 +7,31 @@ import "./index.css"; // custom CSS
 
 export default function Signup() {
   const navigate = useNavigate();
+
+  // Form state values
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // ✅ New state
+
+  // Toggle password visibility
+  const [showPassword, setShowPassword] = useState(false);
+
+  // Display API errors
   const [error, setError] = useState("");
 
+  // Handle signup form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const res = await signup({ name, email, password });
+
+      // Redirect user after successful signup
       navigate("/login");
-      return res.json({ msg: "Signup successful" });
+
+      return res.json({ msg: "Signup successful" }); // Debug message (not required)
     } catch (err) {
+      // Show specific backend error or fallback message
       setError(err.response?.data?.msg || "Signup failed");
     }
   };
@@ -29,6 +41,7 @@ export default function Signup() {
       <form onSubmit={handleSubmit} className="signup-form p-4 rounded shadow">
         <h2 className="text-center mb-4">Create Account</h2>
 
+        {/* Render error message */}
         {error && <p className="text-danger text-center">{error}</p>}
 
         <div className="mb-3">
@@ -55,7 +68,7 @@ export default function Signup() {
 
         <div className="mb-2">
           <input
-            type={showPassword ? "text" : "password"} // ✅ Toggle input type
+            type={showPassword ? "text" : "password"} // Toggle visibility
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -64,7 +77,7 @@ export default function Signup() {
           />
         </div>
 
-        {/* ✅ Show Password Checkbox */}
+        {/* Show Password Checkbox */}
         <div className="form-check mb-4">
           <input
             type="checkbox"
@@ -82,6 +95,7 @@ export default function Signup() {
           Signup
         </button>
 
+        {/* Redirect to login page */}
         <p className="text-center">
           Already have an account? <Link to="/login">Login</Link>
         </p>

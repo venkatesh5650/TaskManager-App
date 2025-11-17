@@ -3,35 +3,36 @@ import { useNavigate, Link } from "react-router-dom";
 import { login } from "../../services/api";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./index.css"; // custom CSS file
+import "./index.css"; // custom styles
 
 export default function Login() {
   const navigate = useNavigate();
+
+  // Form state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // ✅ NEW
+  const [showPassword, setShowPassword] = useState(false); // Toggle password visibility
   const [error, setError] = useState("");
 
-  // ✅ Redirect if already logged in
+  // Redirect user if already authenticated
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/dashboard");
-    }
+    if (token) navigate("/dashboard");
   }, [navigate]);
 
+  // Handle login submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await login({ email, password });
-      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("token", res.data.token); // Store JWT
       navigate("/dashboard");
     } catch (err) {
       setError(err.response?.data?.msg || "Login failed");
     }
   };
 
-  // ✅ Demo Login Autofill
+  // Autofill demo credentials for quick testing
   const fillDemoCredentials = () => {
     setEmail("demo@taskApp.com");
     setPassword("demo5650");
@@ -42,6 +43,7 @@ export default function Login() {
       <form onSubmit={handleSubmit} className="login-form p-4 rounded shadow">
         <h2 className="text-center mb-4 loginHead">Welcome Back</h2>
 
+        {/* Display login errors */}
         {error && <p className="text-danger text-center">{error}</p>}
 
         <div className="mb-3">
@@ -57,7 +59,7 @@ export default function Login() {
 
         <div className="mb-2">
           <input
-            type={showPassword ? "text" : "password"} // ✅ Toggle visibility
+            type={showPassword ? "text" : "password"} // Show/hide password
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -66,7 +68,7 @@ export default function Login() {
           />
         </div>
 
-        {/* ✅ Show Password Checkbox */}
+        {/* Password visibility toggle */}
         <div className="form-check mb-4">
           <input
             type="checkbox"
@@ -84,6 +86,7 @@ export default function Login() {
           Login
         </button>
 
+        {/* Demo login button */}
         <button
           type="button"
           onClick={fillDemoCredentials}
@@ -92,6 +95,7 @@ export default function Login() {
           Use Demo Account
         </button>
 
+        {/* Navigate to signup */}
         <p className="text-center">
           Don’t have an account? <Link to="/signup">Signup</Link>
         </p>

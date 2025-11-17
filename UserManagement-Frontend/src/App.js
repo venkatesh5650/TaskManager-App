@@ -9,8 +9,12 @@ export default function App() {
   return (
     <Router>
       <Routes>
+
+        {/* Public routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+
+        {/* Protected routes — only accessible if JWT exists */}
         <Route
           path="/dashboard"
           element={
@@ -19,6 +23,7 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/profile"
           element={
@@ -27,6 +32,8 @@ export default function App() {
             </ProtectedRoute>
           }
         />
+
+        {/* Fallback route */}
         <Route path="*" element={<Login />} />
       </Routes>
     </Router>
